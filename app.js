@@ -13,6 +13,7 @@ const multer         = require('multer');
 const fs             = require('fs');
 
 const app  = express();
+app.set('trust proxy', 1);  
 app.use(cookieParser());
 
 const pool = mysql.createPool({
@@ -86,10 +87,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: 'your-secret-key',
+  secret: process.env.SESSION_SECRET || 'dev',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: process.env.NODE_ENV === 'production' }
+  cookie: {
+    secure: false,                  // change to true when site is on HTTPS
+    sameSite: 'lax'
+  }
 }));
 app.use(flash());
 app.use((req, res, next) => {
