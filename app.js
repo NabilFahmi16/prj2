@@ -16,16 +16,27 @@ const app  = express();
 app.set('trust proxy', 1);  
 app.use(cookieParser());
 
+const {
+  DB_HOST      = 'yb-86s.h.filess.io',
+  DB_PORT      = '3307',
+  DB_USER      = 'petadopt_bendoldest',
+  DB_PASSWORD  = 'a023c7b7ee3cffecdc7a918d03af667f7e288c00',
+  DB_NAME      = 'petadopt_bendoldest',
+  DB_POOL_SIZE = '5'
+} = process.env;
+
 const pool = mysql.createPool({
-  host: 'c237-all.mysql.database.azure.com',
-  user: 'c237admin',
-  password: 'c2372025!',
-  database: 'petadopt',
-  port: 3306,
+  host: DB_HOST,
+  port: Number(DB_PORT),
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_NAME,
   waitForConnections: true,
-  connectionLimit: 5,
-  queueLimit: 0       
+  connectionLimit: Number(DB_POOL_SIZE),
+  queueLimit: 0
 });
+module.exports.pool = pool; 
+
 
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
