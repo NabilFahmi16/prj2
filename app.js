@@ -26,11 +26,11 @@ const {
 } = process.env;
 
 const pool = mysql.createPool({
-  host: DB_HOST,
-  port: Number(DB_PORT),
-  user: DB_USER,
-  password: DB_PASSWORD,
-  database: DB_NAME,
+  host: '127.0.0.1',
+  port: '3306',
+  user: 'root',
+  password: 'Republic_C207',
+  database: 'petadopt',
   waitForConnections: true,
   connectionLimit: Number(DB_POOL_SIZE),
   queueLimit: 0
