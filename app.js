@@ -12,6 +12,12 @@ const cookieParser   = require('cookie-parser');
 const multer         = require('multer');
 const fs             = require('fs');
 
+
+
+bcrypt.hash('w', 10, (err, hash) => {
+  
+});
+
 const app  = express();
 app.set('trust proxy', 1);  
 app.use(cookieParser());
@@ -265,9 +271,8 @@ app.route('/login')
     
     const user = rows[0];
     
-    const ok = userType === 'admin' 
-      ? password === user.password
-      : await bcrypt.compare(password, user.password);
+    const ok = await bcrypt.compare(password, user.password);
+
       
     if (!ok) {
       return res.render('login', { 
