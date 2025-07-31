@@ -13,3 +13,7 @@ Required Libraries
     bcryptjs: Handles password hashing and comparison for secure authentication.
     mysql2: MySQL driver for Node.js to interact with the petadopt database 
     connect-flash
+
+ADMIN ACC
+Username : w@w
+password : w
